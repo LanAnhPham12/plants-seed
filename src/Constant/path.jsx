@@ -1,4 +1,5 @@
 const path = {
-    products : '/products'
+    products : '/products',
+    home: '/'
 }
 export default path;
