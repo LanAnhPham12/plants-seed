@@ -1,13 +1,10 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@import url("https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&display=swap");
 * {
   font-size: 16px;
+  box-sizing: border-box;
+  font-family: "Cardo", serif;
+  font-weight: 400;
+  font-style: normal;
 }
 .f-s-1 {
   font-size: 1px;
@@ -608,4 +605,24 @@ body {
 }
 .f-s-200 {
   font-size: 200px;
+}
+.f-f-Cardo-Regular {
+  font-family: "Cardo", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.f-f-Cardo-Medium {
+  font-family: "Cardo", serif;
+  font-weight: 500;
+  font-style: normal;
+}
+.f-f-Cardo-Bold {
+  font-family: "Cardo", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+.f-f-Cardo-Semibold {
+  font-family: "Cardo", serif;
+  font-weight: 600;
+  font-style: normal;
 }
