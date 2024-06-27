@@ -31,38 +31,13 @@ function Header() {
 
                 </ul>
             </div>
-            <div className="d-flex gap-4" >
-                <button className={`${styles["search_glass"]} border-0  bg-transparent ${styles['fs-5']}`}
-                 onClick={toggleSearch}><FontAwesomeIcon icon={faSearch} style={{ color: '#fff' }} />
+            <div className="d-flex gap-5 me-4" >
+                <button className={`${styles["search_glass"]} border-0  bg-transparent`}><FontAwesomeIcon icon={faSearch} style={{ color: '#fff' }} />
                 </button>
                 <button className={`border-0 bg-transparent ${styles["fs-5"]}`}><FontAwesomeIcon className='text-white' icon={faCartShopping} /></button>
                 <button className={`border-0 bg-transparent ${styles["fs-5"]}`}><FontAwesomeIcon icon={faUser} className='text-white' /></button>
             </div>
             </div>
-            </div>
-
-
-            <div id={`${styles["myDIV"]}`} style={{ display: isSearchVisible ? 'block' : 'none' }}>
-                <div className={`${styles["Input-Search"]}`}>
-                <input type="text" name="" id="" placeholder="Search entire store here..."/>
-                <button className={`${styles["search-btn"]}`}>Search</button>
-                </div>
-                <div className="trending-search">
-                    <h5 className="text-uppercase"><span className="mx-2" style= {{ marginRight: ' 5px' }}><i
-                                className="fa-solid fa-arrow-trend-up"></i></span>TRENDING
-                        SEARCHES</h5>
-
-                    <div className={`${styles["procduct-type"]}`}>
-                        <button className={`${styles["btn-product"]}`}>Men Shirts</button>
-                        <button className={`${styles["btn-product"]}`}>Cargo Joggers</button>
-                        <button className={`${styles["btn-product"]}`}>Oversized T-shirts</button>
-                        <button className={`${styles["btn-product"]}`}>T-shirts</button>
-                        <button className={`${styles["btn-product"]}`}>Combos</button>
-                        <button className={`${styles["btn-product"]}`}>Pyjamas</button>
-                        <button className={`${styles["btn-product"]}`}>Boxers</button>
-                        <button className={`${styles["btn-product"]}`}>Chino Pants</button>
-                    </div>
-                </div>
             </div>
 
         </div>
