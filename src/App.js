@@ -7,6 +7,7 @@ import ProductList from "./pages/ProductList/ProductList";
 import Home from "./pages/Home/home";
 import Login from "./pages/Login/Login";
 import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 function App() {
   return (
     <Router>
@@ -16,6 +17,7 @@ function App() {
         <Route path={path.products} element={<ProductList />}></Route>
         <Route path={path.login} element={<Login />}></Route>
         <Route path={path.header} element={<Header />}></Route>
+        <Route path={path.footer} element={<Footer />}></Route>
       </Routes>
     </Router>
   );
