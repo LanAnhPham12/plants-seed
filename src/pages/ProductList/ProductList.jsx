@@ -1,9 +1,11 @@
 import Product from "./Product/Product";
-import './ProductList.css'
+import styles from './ProductList.module.css'
+import dataProduct from "../../data/product.json"
 function ProductList() {
+    console.log(dataProduct)
     return ( 
         <div className="">
-            <div className="banner position-relative d-flex justify-content-center align-items-center">
+            <div className={`${styles.banner} position-relative d-flex justify-content-center align-items-center`}>
                 <div className="position-absolute text-center col-6 text-white f-s-18">
                     <div className="f-s-60">
                     Exotic Fruit & Tree Seeds
@@ -12,13 +14,12 @@ function ProductList() {
                 </div>
             </div>
             <div className="container mt-5 px-5">
-                <div className="row row-cols-4 px-5 g-4">
+                <div className="row row-cols-4 px-5 g-4 gy-5">
                     <Product/>
                     <Product/>
                     <Product/>
                     <Product/>
                     <Product/>
-
                 </div>
             </div>
         </div>
