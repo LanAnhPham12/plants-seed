@@ -12,24 +12,24 @@ function Footer() {
                     <span>Theo dõi chúng tôi trên các trang mạng xã hội:</span>
                 </div>
                 <div>
-                <a href="" className="me-4 text-reset">
+                <Link to="" className="me-4 text-reset">
                     <FontAwesomeIcon icon={faFacebookF} />
-                </a>
-                <a href="" className="me-4 text-reset">
+                </Link>
+                <Link to="" className="me-4 text-reset">
                     <FontAwesomeIcon icon={faTwitter} />
-                </a>
-                <a href="" className="me-4 text-reset">
+                </Link>
+                <Link to="" className="me-4 text-reset">
                     <FontAwesomeIcon icon={faGoogle} />
-                </a>
-                <a href="" className="me-4 text-reset">
+                </Link>
+                <Link to="" className="me-4 text-reset">
                     <FontAwesomeIcon icon={faInstagram} />
-                </a>
-                <a href="" className="me-4 text-reset">
+                </Link>
+                <Link to="" className="me-4 text-reset">
                     <FontAwesomeIcon icon={faLinkedin} />
-                </a>
-                <a href="" className="me-4 text-reset">
+                </Link>
+                <Link to="" className="me-4 text-reset">
                     <FontAwesomeIcon icon={faGithub} />
-                </a>
+                </Link>
                 </div>
             </section>
           <section class="border-bottom">
@@ -68,16 +68,16 @@ function Footer() {
                   Thông tin
                   </h6>
                   <p>
-                    <a href="#!" class="text-reset text-decoration-none">Chính sách</a>
+                    <Link to="" class="text-reset text-decoration-none">Chính sách</Link>
                   </p>
                   <p>
-                    <a href="#!" class="text-reset text-decoration-none">Thông báo pháp lý</a>
+                    <Link to="" class="text-reset text-decoration-none">Thông báo pháp lý</Link>
                   </p>
                   <p>
-                    <a href="#!" class="text-reset text-decoration-none">Giao hàng</a>
+                    <Link to="" class="text-reset text-decoration-none">Giao hàng</Link>
                   </p>
                   <p>
-                    <a href="#!" class="text-reset text-decoration-none">Trợ giúp</a>
+                    <Link to="" class="text-reset text-decoration-none">Trợ giúp</Link>
                   </p>
                 </div>
         
