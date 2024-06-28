@@ -1,13 +1,7 @@
-import React, { useState } from 'react';
 import styles from "./header.module.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faCartShopping, faUser } from '@fortawesome/free-solid-svg-icons';
 function Header() {
-    const [isSearchVisible, setSearchVisible] = useState(false);
-
-    function toggleSearch() {
-      setSearchVisible(!isSearchVisible);
-    }
     return ( 
         <div>
             <div>
