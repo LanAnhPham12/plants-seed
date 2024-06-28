@@ -3,6 +3,7 @@ import styles from './ProductList.module.css'
 import dataProduct from "../../data/product.json"
 import { useState } from 'react';
 import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
 function ProductList() {
     
     const [currentPage, setCurrentPage] = useState(1);
@@ -60,7 +61,7 @@ function ProductList() {
     return (
         <div className="">
             <Header/>
-            <div className={`${styles.banner} position-relative d-flex justify-content-center align-items-center`}>
+            <div className={` ${styles.banner} position-relative d-flex justify-content-center align-items-center mt-5 pt-4`}>
                 <div className="position-absolute text-center col-6 text-white f-s-18">
                     <div className="f-s-60">
                         Exotic Fruit & Tree Seeds
@@ -123,7 +124,9 @@ function ProductList() {
                   
                 </div>
             </div>
+        <Footer/>
         </div>
+
     );
 }
 

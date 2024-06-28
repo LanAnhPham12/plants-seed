@@ -3,8 +3,8 @@ import styles from '../ProductList/ProductList.module.css'
 import dataProduct from "../../data/product.json"
 import { useState } from 'react';
 import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
 function HistoryProduct() {
-
     const [currentPage, setCurrentPage] = useState(1);
 
     // Tính toán các chỉ mục của các sản phẩm hiện tại
@@ -49,7 +49,7 @@ function HistoryProduct() {
     return ( 
         <div>
             <Header/>
-            <div className="container mb-5">
+            <div className="container mb-5 pt-5">
                 <div className="row justify-content-center mt-5">
                     <div className= {`col-auto f-s-36 f-f-Cardo-Semibold ${styles['text-green']}`}>
                         Sản phẩm đã xem
@@ -94,6 +94,7 @@ function HistoryProduct() {
                   
                 </div>
             </div>
+            <Footer />
         </div>
     );
 }
