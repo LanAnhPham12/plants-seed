@@ -2,8 +2,9 @@ import Product from "./Product/Product";
 import styles from './ProductList.module.css'
 import dataProduct from "../../data/product.json"
 import { useState } from 'react';
-
+import Header from "../../components/Header/Header";
 function ProductList() {
+    
     const [currentPage, setCurrentPage] = useState(1);
 
     // Tính toán các chỉ mục của các sản phẩm hiện tại
@@ -40,9 +41,25 @@ function ProductList() {
 
         return pageNumbers;
     };
+    const [sortByName, setSortByName] = useState(false);
+    const [sortByPrice, setSortByPrice] = useState(false);
+    const sortByNameAsc = (a, b) => a.product.title.localeCompare(b.product.title);
+    const sortByNameDesc = (a, b) => b.product.title.localeCompare(a.product.title);
+    const sortByPriceAsc = (a, b) => a.price.amount - b.price.amount;
+    const sortByPriceDesc = (a, b) => b.price.amount - a.price.amount;
+    let sortedProducts = [...currentProducts];
 
+    if (sortByName) {
+    sortedProducts.sort(sortByName === 'asc' ? sortByNameAsc : sortByNameDesc);
+    }
+
+    if (sortByPrice) {
+    sortedProducts.sort(sortByPrice === 'asc' ? sortByPriceAsc : sortByPriceDesc);
+    }
+    console.log(sortedProducts);
     return (
         <div className="">
+            <Header/>
             <div className={`${styles.banner} position-relative d-flex justify-content-center align-items-center`}>
                 <div className="position-absolute text-center col-6 text-white f-s-18">
                     <div className="f-s-60">
@@ -52,8 +69,38 @@ function ProductList() {
                 </div>
             </div>
             <div className="container my-5 px-5">
+                <div className="row px-5">
+                    <div className="col-12 mb-4">
+                    <div className="d-flex justify-content-between mb-3">
+                            <div className="d-flex align-items-center f-s-18">
+                                <span className="f-s-18 f-f-Cardo-Semibold">Sắp xếp theo tên:</span>
+                                <select
+                                className={`btn ${styles['bg-grey']} ${styles['text-green']} mx-1`}
+                                value={sortByName}
+                                onChange={(e) => setSortByName(e.target.value)}
+                                >
+                                <option className="f-s-18 f-f-Cardo-Semibold" value="">Không sắp xếp</option>
+                                <option className="f-s-18 f-f-Cardo-Semibold" value="asc">Tăng dần</option>
+                                <option className="f-s-18 f-f-Cardo-Semibold" value="desc">Giảm dần</option>
+                                </select>
+                            </div>
+                            <div className="d-flex align-items-center f-s-18">
+                                <span className="f-s-18 f-f-Cardo-Semibold">Sắp xếp theo giá:</span>
+                                <select
+                                className={`btn ${styles['bg-grey']} ${styles['text-green']} mx-1`}
+                                value={sortByPrice}
+                                onChange={(e) => setSortByPrice(e.target.value)}
+                                >
+                                <option className="f-s-18 f-f-Cardo-Semibold" value="">Không sắp xếp</option>
+                                <option className="f-s-18 f-f-Cardo-Semibold" value="asc">Tăng dần</option>
+                                <option className="f-s-18 f-f-Cardo-Semibold" value="desc">Giảm dần</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div className="row row-cols-4 px-5 g-4 gy-5">
-                    {currentProducts.map((product, index) => (
+                    {sortedProducts.map((product, index) => (
                         <Product key={index} dataProduct={product} />
                     ))}
                 </div>
