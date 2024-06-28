@@ -3,6 +3,8 @@ const path = {
     login : '/login',
     header : '/header',
     footer : '/footer',
-    home: '/'
+    home: '/',
+    searchProducts: '/search',
+    historyProducts: '/history',
 }
 export default path;
