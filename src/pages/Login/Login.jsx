@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styles from "./login.module.css"
 import "./login.module.css"
+import axios from 'axios'
 const Login = () => {
   const [isSignUpMode, setIsSignUpMode] = useState(false);
 
@@ -15,45 +16,62 @@ const Login = () => {
   const usernameRef = useRef(null);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
-
-  useEffect(() => {
-    // Tạo file user.json nếu chưa tồn tại
-    fetch('/user.json', { method: 'HEAD' })
-      .then(response => {
-        if (!response.ok) {
-          // File user.json chưa tồn tại, tạo mới
-          return fetch('/user.json', { method: 'PUT' });
-        }
-      })
-      .catch(error => {
-        console.error('Lỗi khi kiểm tra file user.json:', error);
-      });
-  }, []);
+  const usernameLogin = useRef(null);
+  const passwordLogin = useRef(null);
 
   const handleSignUpSubmit = (e) => {
     e.preventDefault();
     const newUser = {
+      // id: data.length + 1,
       username: usernameRef.current.value,
       email: emailRef.current.value,
       password: passwordRef.current.value
     };
-    console.log(newUser);
-    
+    console.log(JsonServer);
+    // console.log(newUser);
+    // data.map((data, key) => (
+    //   console.log(data.id, data.email, data.username, data.password, key)
+    // ))
+  }
+
+  const handleSignInSubmit = (e) => {
+    e.preventDefault();
+    const newUser = {
+      username: usernameLogin.current.value,
+      password: passwordLogin.current.value
+    };
+    var check = 0
+
+    // const [data, setData] = useState([])
+    // useEffect(() => {
+    //   axios.get('https://localhost:3001/users')
+    //   .then(res =>setData(res.data))
+    //   .catch(err => console.log(err))
+    // }, [])
+    // data.map((data, key) => {
+    //   if(newUser.username === data.username && newUser.password === data.password){
+    //     window.location.href = "/"
+    //     localStorage.setItem("user_id", data.id)
+    //     check = 1
+    //     return
+    //   }
+    // })
+    // if(check == 0) alert("Sai tài khoản hoặc mật khẩu!")
   }
 
   return (
     <div className={`${styles['container']} ${isSignUpMode ? styles['sign-up-mode'] : ""}`}>
       <div className={`${styles['forms-container']}`}>
         <div className={`${styles['signin-signup']}`}>
-          <form action="" className={`${styles["sign-in-form"]}`}>
+          <form action="" className={`${styles["sign-in-form"]}`} onSubmit={handleSignInSubmit}>
             <h2 className={`${styles.title}`}>Đăng nhập</h2>
             <div className={`${styles["input-field"]}`}>
               <i className="fas fa-user"></i>
-              <input type="text" placeholder="Tài khoản" required />
+              <input type="text" placeholder="Tài khoản" ref={usernameLogin} required />
             </div>
             <div className={`${styles["input-field"]}`}>
               <i className="fas fa-lock"></i>
-              <input type="password" placeholder="Mật khẩu" required />
+              <input type="password" placeholder="Mật khẩu" ref={passwordLogin} required />
             </div>
             <input type="submit" value="Đăng nhập" className={`${styles.btn} solid`} required />
           </form>
