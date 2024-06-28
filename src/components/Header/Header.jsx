@@ -5,7 +5,7 @@ function Header() {
     return ( 
         <div>
             <div>
-            <div className='d-flex align-items-center justify-content-between px-3' style={{ backgroundColor: "#046a38", color: "#fff" }}>
+            <div className='d-flex align-items-center justify-content-between px-3 fixed-top' style={{ backgroundColor: "#046a38", color: "#fff" }}>
                 <div className="d-flex align-items-center">
                 <img src="https://dms.mydukaan.io/original/webp/media/32d1d4d6-aa87-4e7b-a8e2-f2b57a815e88.png" alt="" style={{ width: '70px' }} />
                 <span className="fw-bold fs-5 ">Seeds</span>

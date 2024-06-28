@@ -3,6 +3,7 @@ import styles from "../ProductList/ProductList.module.css"
 import dataProduct from "../../data/product.json"
 import { useState } from 'react';
 import Product from "../ProductList/Product/Product";
+import Footer from "../../components/Footer/Footer";
 function SearchProduct() {
  
     const [currentPage, setCurrentPage] = useState(1);
@@ -49,7 +50,7 @@ function SearchProduct() {
     return ( 
         <div>
             <Header/>
-            <div className="container mb-5">
+            <div className="container my-5 pt-4">
                 <div className="row justify-content-center mt-5">
                     <div className= {`col-auto f-s-36 f-f-Cardo-Semibold ${styles['text-green']}`}>
                         Tìm kiếm sản phẩm
@@ -94,6 +95,7 @@ function SearchProduct() {
                   
                 </div>
             </div>
+            <Footer/>
         </div>
      );
 }
