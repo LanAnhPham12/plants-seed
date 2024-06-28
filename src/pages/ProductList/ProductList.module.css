@@ -32,3 +32,17 @@
     transform: scale(1.1);
   }
 }
+.bg-green {
+  background-color: rgb(4, 106, 56);
+}
+.bg-grey {
+  background-color: #bcbaba;
+}
+.bg-grey:hover {
+  box-shadow: 0 0 0 0.2rem #8a8686;
+  background-color: #bcbaba;
+}
+.bg-green:hover {
+  box-shadow: 0 0 0 0.2rem #0ae87b;
+  background-color: rgb(4, 106, 56);
+}
