@@ -16,6 +16,7 @@ function App() {
       <Routes>
         <Route path={path.products} element={<ProductList />}></Route>
         <Route path={path.home} element={<Home />}></Route>
+        <Route path={path.homeWithId(":id")} element={<Home />} />
         <Route path={path.products} element={<ProductList />}></Route>
         <Route path={path.login} element={<Login />}></Route>
         <Route path={path.header} element={<Header />}></Route>

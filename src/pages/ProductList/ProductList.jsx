@@ -1,66 +1,98 @@
-import Product from "./Product/Product";
-import styles from './ProductList.module.css'
-import dataProduct from "../../data/product.json"
-import { useState } from 'react';
-import Header from "../../components/Header/Header";
-import Footer from "../../components/Footer/Footer";
+import React, { useEffect, useState } from 'react';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
+import Product from './Product/Product';
+import productApi from '../../api/productApi';
+import styles from '../ProductList/ProductList.module.css'
+
 function ProductList() {
-    
+    const [products, setProducts] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
+    const [sortByName, setSortByName] = useState(null);
+    const [sortByPrice, setSortByPrice] = useState(null);
 
-    // Tính toán các chỉ mục của các sản phẩm hiện tại
-    const currentProducts = dataProduct.find((item) => item.page === currentPage).jsonObject.collection.productVariants;
-    // Tính tổng số trang
-    const totalPages = Math.ceil(dataProduct.length);
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                console.log('Fetching products from API...');
+                const response = await productApi.getAllProducts();
+                console.log('Items from API:', response);
+                if (Array.isArray(response) && response.length > 0) {
+                    setProducts(response);
+                    console.log('Products set successfully:', response);
+                } else {
+                    console.log('API response is not valid or empty:', response);
+                    setProducts([]);
+                }
+            } catch (error) {
+                console.error('Error fetching products:', error);
+                // Handle error state or logging as needed
+            }
+        };
 
-    // Hàm để hiển thị các nút phân trang
+        fetchProducts();
+    }, []);
+
+    
+    const currentProducts = products.find((item) => item.page === currentPage)?.jsonObject.collection.productVariants || [];
+
+    // Tính toán tổng số trang
+    const totalPages = Math.ceil(products.length);
+
+    // Render số trang
     const renderPageNumbers = () => {
         const pageNumbers = [];
-        const maxVisiblePages = 5; // Số lượng trang tối đa hiển thị
-
-        let startPage = currentPage - Math.floor(maxVisiblePages / 2);
-        if (startPage < 1) {
-            startPage = 1;
-        }
-
-        let endPage = startPage + maxVisiblePages - 1;
-        if (endPage > totalPages) {
-            endPage = totalPages;
-        }
+        const maxPageButtons = 5; // Giới hạn số lượng button chuyển trang
+        const startPage = Math.max(1, currentPage - Math.floor(maxPageButtons / 2));
+        const endPage = Math.min(startPage + maxPageButtons - 1, totalPages);
 
         for (let i = startPage; i <= endPage; i++) {
             pageNumbers.push(
                 <button
                     key={i}
                     onClick={() => setCurrentPage(i)}
-                    className={`f-s-20 f-f-Cardo-Semibold btn  ${currentPage === i ? `${styles['bg-green']} text-white` : `${styles['bg-grey']}`} ${styles['text-green']} mx-1`}
-                >
+                    className={`btn mx-1  ${currentPage === i ? styles['bg-green'] :styles['bg-grey'] }`}
+                    >
                     {i}
                 </button>
             );
         }
-
         return pageNumbers;
     };
-    const [sortByName, setSortByName] = useState(false);
-    const [sortByPrice, setSortByPrice] = useState(false);
+
+
+    // Xử lý sự kiện sắp xếp theo tên
+    const sortByNameHandler = (e) => {
+        setSortByName(e.target.value);
+        setSortByPrice(null);
+    };
+
+    // Xử lý sự kiện sắp xếp theo giá
+    const sortByPriceHandler = (e) => {
+        setSortByPrice(e.target.value);
+        setSortByName(null);
+    };
+
+ // Sắp xếp sản phẩm hiện tại theo tên hoặc giá
     const sortByNameAsc = (a, b) => a.product.title.localeCompare(b.product.title);
     const sortByNameDesc = (a, b) => b.product.title.localeCompare(a.product.title);
     const sortByPriceAsc = (a, b) => a.price.amount - b.price.amount;
     const sortByPriceDesc = (a, b) => b.price.amount - a.price.amount;
+
     let sortedProducts = [...currentProducts];
 
     if (sortByName) {
-    sortedProducts.sort(sortByName === 'asc' ? sortByNameAsc : sortByNameDesc);
+        sortedProducts.sort(sortByName === 'asc' ? sortByNameAsc : sortByNameDesc);
+    } else if (sortByPrice) {
+        sortedProducts.sort(sortByPrice === 'asc' ? sortByPriceAsc : sortByPriceDesc);
     }
 
-    if (sortByPrice) {
-    sortedProducts.sort(sortByPrice === 'asc' ? sortByPriceAsc : sortByPriceDesc);
-    }
     console.log(sortedProducts);
+
+
     return (
-        <div className="">
-            <Header/>
+        <div>
+            <Header />
             <div className={` ${styles.banner} position-relative d-flex justify-content-center align-items-center mt-5 pt-4`}>
                 <div className="position-absolute text-center col-6 text-white f-s-18">
                     <div className="f-s-60">
@@ -72,38 +104,42 @@ function ProductList() {
             <div className="container my-5 px-5">
                 <div className="row px-5">
                     <div className="col-12 mb-4">
-                    <div className="d-flex justify-content-between mb-3">
+                        <div className="d-flex justify-content-between mb-3">
                             <div className="d-flex align-items-center f-s-18">
                                 <span className="f-s-18 f-f-Cardo-Semibold">Sắp xếp theo tên:</span>
                                 <select
-                                className={`btn ${styles['bg-grey']} ${styles['text-green']} mx-1`}
-                                value={sortByName}
-                                onChange={(e) => setSortByName(e.target.value)}
+                                    className={`btn ${styles['bg-grey']} ${styles['text-green']} mx-1`}
+                                    value={sortByName || ''}
+                                    onChange={sortByNameHandler}
                                 >
-                                <option className="f-s-18 f-f-Cardo-Semibold" value="">Không sắp xếp</option>
-                                <option className="f-s-18 f-f-Cardo-Semibold" value="asc">Tăng dần</option>
-                                <option className="f-s-18 f-f-Cardo-Semibold" value="desc">Giảm dần</option>
+                                    <option className="f-s-18 f-f-Cardo-Semibold" value="">Không sắp xếp</option>
+                                    <option className="f-s-18 f-f-Cardo-Semibold" value="asc">Tăng dần</option>
+                                    <option className="f-s-18 f-f-Cardo-Semibold" value="desc">Giảm dần</option>
                                 </select>
                             </div>
                             <div className="d-flex align-items-center f-s-18">
                                 <span className="f-s-18 f-f-Cardo-Semibold">Sắp xếp theo giá:</span>
                                 <select
-                                className={`btn ${styles['bg-grey']} ${styles['text-green']} mx-1`}
-                                value={sortByPrice}
-                                onChange={(e) => setSortByPrice(e.target.value)}
+                                    className={`btn ${styles['bg-grey']} ${styles['text-green']} mx-1`}
+                                    value={sortByPrice || ''}
+                                    onChange={sortByPriceHandler}
                                 >
-                                <option className="f-s-18 f-f-Cardo-Semibold" value="">Không sắp xếp</option>
-                                <option className="f-s-18 f-f-Cardo-Semibold" value="asc">Tăng dần</option>
-                                <option className="f-s-18 f-f-Cardo-Semibold" value="desc">Giảm dần</option>
+                                    <option className="f-s-18 f-f-Cardo-Semibold" value="">Không sắp xếp</option>
+                                    <option className="f-s-18 f-f-Cardo-Semibold" value="asc">Tăng dần</option>
+                                    <option className="f-s-18 f-f-Cardo-Semibold" value="desc">Giảm dần</option>
                                 </select>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="row row-cols-4 px-5 g-4 gy-5">
-                    {sortedProducts.map((product, index) => (
-                        <Product key={index} dataProduct={product} />
-                    ))}
+                    {sortedProducts.length > 0 ? (
+                        sortedProducts.map((product, index) => (
+                            <Product key={index} dataProduct={product} />
+                        ))
+                    ) : (
+                        <div>No products found</div>
+                    )}
                 </div>
                 <div className="d-flex justify-content-center mt-4">
                     <button
@@ -121,12 +157,10 @@ function ProductList() {
                     >
                         Sau
                     </button>
-                  
                 </div>
             </div>
-        <Footer/>
+            <Footer />
         </div>
-
     );
 }
 
