@@ -32,7 +32,10 @@ const Login = () => {
       const newUser = {
         username: username,
         email: email,
-        password: password
+        password: password,
+        cart: [],
+        historyProduct:[],
+        orderProduct: []
       };
   
       try {

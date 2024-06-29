@@ -2,6 +2,7 @@ import axios from "axios";
 import config from "../Constant/config"; // Đường dẫn tới file config của bạn
 
 export const URL_GET_ALL = "products";
+export const URL_GET_PRODUCT_DETAIL = "productDetails";
 
 const productApi = {
   getAllProducts: async () => {
@@ -29,6 +30,25 @@ const productApi = {
             return productVariants[j]; // Trả về sản phẩm nếu tìm thấy id
           }
         }
+      }
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  },
+  getProductDetail: async (productId) => {
+    try {
+      const response = await axios.get(
+        `${config.baseURL}${URL_GET_PRODUCT_DETAIL}`
+      );
+      const product = response.data.find((p) => p.id === productId);
+
+      if (product) {
+        return {
+          success: true,
+          message: "Lấy chi tiết sản phẩm thành công",
+          product: product,
+        };
       }
     } catch (error) {
       console.error(error);

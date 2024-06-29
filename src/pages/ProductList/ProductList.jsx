@@ -14,14 +14,10 @@ function ProductList() {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                console.log('Fetching products from API...');
                 const response = await productApi.getAllProducts();
-                console.log('Items from API:', response);
                 if (Array.isArray(response) && response.length > 0) {
                     setProducts(response);
-                    console.log('Products set successfully:', response);
                 } else {
-                    console.log('API response is not valid or empty:', response);
                     setProducts([]);
                 }
             } catch (error) {
@@ -32,7 +28,6 @@ function ProductList() {
 
         fetchProducts();
     }, []);
-
     
     const currentProducts = products.find((item) => item.page === currentPage)?.jsonObject.collection.productVariants || [];
 
@@ -87,7 +82,6 @@ function ProductList() {
         sortedProducts.sort(sortByPrice === 'asc' ? sortByPriceAsc : sortByPriceDesc);
     }
 
-    console.log(sortedProducts);
 
 
     return (
