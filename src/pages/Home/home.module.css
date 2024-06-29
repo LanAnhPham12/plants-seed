@@ -1,0 +1,52 @@
+.banner {
+    background-image: url("https://www.gardenparadiseseeds.com/cdn/shop/files/buy_plants_seeds_ireland_plant_seeds_garden_seeds_83ce36d7-2d02-4c79-b932-b0891230b97b.jpg?v=1691399085");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 700px;
+}
+
+.btnn{
+    background-color: #068647;
+    border-color: #068647;
+    color: #fff;
+    padding: 10px 15px;
+
+}
+
+.btnn:hover {
+    background-color: #046134;
+    border: 2px solid #0AE87B;
+}
+
+.wrapper {
+    transition: padding .3s ease, max-width .3s ease;
+    margin: 0 auto;
+    padding-left: 30px;
+    padding-right: 30px;
+    max-width: 1180px;
+}
+
+.img{
+    border-radius: 5px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 300px;
+    transition: transform 0.3s, opacity 0.3s;
+    margin-bottom: 30px;
+}
+
+.img:hover {
+    opacity: 0.7;
+}
+
+.xxx{
+    width: "100%";
+    height: "100%";
+    top: 35%;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+}
