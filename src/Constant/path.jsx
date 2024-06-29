@@ -1,12 +1,13 @@
 const path = {
-    products: '/products',
+    home: '/',
     login: '/login',
+    products: '/products',
+    productDetail: (id)=> `/products/${id}`,
     header: '/header',
     footer: '/footer',
-    home: '/',
     searchProducts: '/search',
     historyProducts: '/history',
-    homeWithId: (id) => `/home/${id}`  // Thêm path home:id
+    homeWithId: (id) => `/home/${id}` // Thêm path home:id
 };
 
 export default path;
