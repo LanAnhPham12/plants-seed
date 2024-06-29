@@ -29,6 +29,12 @@
       "username": "test2",
       "email": "test2@gmail.com",
       "password": "111"
+    },
+    {
+      "id": "dbd9",
+      "username": "sass",
+      "email": "asas@gmail.com",
+      "password": "sas"
     }
   ],
   "products": [

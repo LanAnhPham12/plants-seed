@@ -1,9 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&display=swap");
 * {
-  font-size: 16px !important;
   box-sizing: border-box;
   font-family: "Cardo", serif;
-  font-weight: 400 !important;
   font-style: normal;
 }
 .f-s-1 {

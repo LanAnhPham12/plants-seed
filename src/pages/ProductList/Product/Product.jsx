@@ -6,7 +6,7 @@ function Product(props) {
     const randomScore = Math.floor(Math.random() * 3) + 3; // Random score between 3 and 5
     const randomReviews = Math.floor(Math.random() * 30) + 1; // Random number of reviews between 1 and 30
     return ( 
-        <Link to={`${dataProduct.product.id}`}>
+        <Link className="text-decoration-none" to={`${dataProduct.product.id}`}>
             <div className={`${styles['card-product']}`}>
                 <div className={`${styles['card-shadow']} card h-100 w-80`}>
                 <img src= {dataProduct.image.src} className="card-img-top h-100" alt="..." sizes="258px"/>
