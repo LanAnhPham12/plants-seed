@@ -38,6 +38,7 @@ function Checkout() {
                                     <h5 className='ms-3 f-f-Cardo-Bold'>Total</h5>
                                     <h4 className='me-3 f-f-Cardo-Bold'>20000 vnđ</h4>
                                 </div>
+                                <button className="btn f-f-Cardo-Bold me-4 mt-4" style={{ float:'right' ,backgroundColor: '#068647', borderColor: '#068647', color: '#fff', padding: '8px 15px'}}>Xác nhận đặt hàng</button>
                             </div>
                             </div>
                     </div>
