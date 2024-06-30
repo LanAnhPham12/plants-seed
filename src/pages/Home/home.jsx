@@ -1,4 +1,3 @@
-import Cart from "../Cart/Cart";
 import { useState, useEffect } from "react";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
@@ -11,9 +10,7 @@ import productApi from '../../api/productApi';
 
 function Home() {
   const [products, setProducts] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [sortByName, setSortByName] = useState(null);
-  const [sortByPrice, setSortByPrice] = useState(null);
+  const currentPage = 1;
 
   useEffect(() => {
       const fetchProducts = async () => {
@@ -40,19 +37,7 @@ function Home() {
   
   const currentProducts = products.find((item) => item.page === currentPage)?.jsonObject.collection.productVariants || [];
 
-// Sắp xếp sản phẩm hiện tại theo tên hoặc giá
-  const sortByNameAsc = (a, b) => a.product.title.localeCompare(b.product.title);
-  const sortByNameDesc = (a, b) => b.product.title.localeCompare(a.product.title);
-  const sortByPriceAsc = (a, b) => a.price.amount - b.price.amount;
-  const sortByPriceDesc = (a, b) => b.price.amount - a.price.amount;
-
   let sortedProducts = [...currentProducts];
-
-  if (sortByName) {
-      sortedProducts.sort(sortByName === 'asc' ? sortByNameAsc : sortByNameDesc);
-  } else if (sortByPrice) {
-      sortedProducts.sort(sortByPrice === 'asc' ? sortByPriceAsc : sortByPriceDesc);
-  }
 
 
       return (
@@ -172,7 +157,7 @@ function Home() {
 
             <div className="box" style={{marginTop: '50px'}}>
               <div className={`${styles.wrapper} d-flex justify-content-center`}>
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/k8g64zMJRA0?rel=0&showinfo=0&vq=720" frameborder="0" allowfullscreen></iframe>
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/k8g64zMJRA0?rel=0&showinfo=0&vq=720" title="media"></iframe>
               </div>
 
             </div>
