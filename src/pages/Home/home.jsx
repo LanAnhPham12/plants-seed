@@ -15,14 +15,10 @@ function Home() {
   useEffect(() => {
       const fetchProducts = async () => {
           try {
-              console.log('Fetching products from API...');
               const response = await productApi.getAllProducts();
-              console.log('Items from API:', response);
               if (Array.isArray(response) && response.length > 0) {
                   setProducts(response);
-                  console.log('Products set successfully:', response);
               } else {
-                  console.log('API response is not valid or empty:', response);
                   setProducts([]);
               }
           } catch (error) {
@@ -106,7 +102,7 @@ function Home() {
             <div className="box" style={{marginTop: '150px'}}>
               <div className={`${styles.wrapper}`}>
                 <div className="grid">
-                  <div class="section-header"><h2 class="section-header__title text-center f-f-Cardo-Bold">Unearth the Magic Within Our Garden Seeds</h2></div>
+                  <div className="section-header"><h2 className="section-header__title text-center f-f-Cardo-Bold">Unearth the Magic Within Our Garden Seeds</h2></div>
                 </div>
                 <div className="row mt-5">
                   <div className="col-4">
@@ -157,7 +153,7 @@ function Home() {
 
             <div className="box" style={{marginTop: '50px'}}>
               <div className={`${styles.wrapper} d-flex justify-content-center`}>
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/k8g64zMJRA0?rel=0&showinfo=0&vq=720" title="media"></iframe>
+              {/* <iframe width="560" height="315" src="https://www.youtube.com/embed/k8g64zMJRA0?rel=0&showinfo=0&vq=720" title="media"></iframe> */}
               </div>
 
             </div>

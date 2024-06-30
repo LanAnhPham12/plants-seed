@@ -17,7 +17,7 @@ const userApi = {
   getUserById: async (userId) => {
     try {
       const response = await axios.get(
-        `${config.baseURL}/${URL_USERS}${userId}`
+        `${config.baseURL}${URL_USERS}/${userId}`
       ); // Lấy dữ liệu người dùng theo ID từ API
       return response.data; // Trả về dữ liệu từ phản hồi của API
     } catch (error) {
@@ -64,6 +64,85 @@ const userApi = {
     } catch (error) {
       console.error("Error logging in:", error.message);
       return { success: false, message: error.message }; // Trả về thông báo lỗi khi có lỗi xảy ra hoặc không tìm thấy người dùng
+    }
+  },
+
+  editUser: async (userId, updatedData) => {
+    try {
+      const response = await axios.put(
+        `${config.baseURL}${URL_USERS}/${userId}`,
+        updatedData
+      );
+      return response.data; // Trả về dữ liệu từ phản hồi của API sau khi chỉnh sửa người dùng
+    } catch (error) {
+      console.error("Error editing user:", error);
+      throw error;
+    }
+  },
+
+  addToCart: async (userId, item) => {
+    try {
+      const user = await userApi.getUserById(userId);
+      const existingItemIndex = user.cart.findIndex(
+        (cartItem) => cartItem.id === item.id
+      );
+
+      let updatedCart;
+      if (existingItemIndex !== -1) {
+        updatedCart = user.cart.map((cartItem, index) =>
+          index === existingItemIndex
+            ? {
+                ...cartItem,
+                seeds: cartItem.seeds + item.seeds,
+                quantity: cartItem.quantity + item.quantity,
+                total: parseFloat(
+                  (parseFloat(cartItem.total) + parseFloat(item.total)).toFixed(
+                    2
+                  )
+                ),
+              }
+            : cartItem
+        );
+      } else {
+        updatedCart = [...user.cart, item];
+      }
+
+      const updatedUser = { ...user, cart: updatedCart };
+      const response = await userApi.editUser(userId, updatedUser);
+      return response;
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+      throw error;
+    }
+  },
+
+  editCart: async (userId, itemId, quantity, total) => {
+    try {
+      const user = await userApi.getUserById(userId);
+      const updatedCart = user.cart.map((item) =>
+        item.id === itemId
+          ? { ...item, quantity: quantity, total: total }
+          : item
+      );
+      const updatedUser = { ...user, cart: updatedCart };
+      const response = await userApi.editUser(userId, updatedUser);
+      return response;
+    } catch (error) {
+      console.error("Error editing cart:", error);
+      throw error;
+    }
+  },
+
+  deleteFromCart: async (userId, itemId) => {
+    try {
+      const user = await userApi.getUserById(userId);
+      const updatedCart = user.cart.filter((item) => item.id !== itemId);
+      const updatedUser = { ...user, cart: updatedCart };
+      const response = await userApi.editUser(userId, updatedUser);
+      return response;
+    } catch (error) {
+      console.error("Error deleting from cart:", error);
+      throw error;
     }
   },
 };
