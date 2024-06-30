@@ -1,6 +1,7 @@
 const path = {
     home: '/',
     login: '/login',
+    checkout: '/checkout',
     products: '/products',
     productDetail: (id)=> `/products/${id}`,
     header: '/header',
