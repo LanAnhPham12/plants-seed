@@ -17,7 +17,6 @@ function App() {
     <Router>
       <Routes>
         <Route path={path.home} element={<Home />}></Route>
-        <Route path={path.homeWithId(":id")} element={<Home />} />
         <Route path={path.products} element={<ProductList />}></Route>
         <Route path={path.productDetail(":id")} element={<ProductDetail />} />
         <Route path={path.login} element={<Login />}></Route>

@@ -83,7 +83,8 @@ const Login = () => {
   
       try {
         const response = await userApi.loginUser(userCredentials);
-        console.log('Login Successful:', response);
+        console.log('Đăng nhập thành công:', response);
+        localStorage.setItem('userId', response.user.id);
         await Swal.fire({
             icon: 'success',
             text: response.message,
@@ -91,7 +92,7 @@ const Login = () => {
             timer: 1000, // Tự động đóng sau 3 giây (3000 miligiây)
             timerProgressBar: false, // Hiển thị thanh tiến trình đếm ngược
         });
-        navigate(path.homeWithId(response.user.id));
+        navigate(path.home);
       } catch (error) {
         console.error('Login Error:', error);
         Swal.fire({
