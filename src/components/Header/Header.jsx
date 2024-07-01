@@ -1,31 +1,40 @@
 import styles from "./header.module.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faCartShopping, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from "react";
 import Cart from "../../pages/Cart/Cart";
 import userApi from "../../api/userApi";
-
-const idUser = localStorage.getItem('userId');
+import path from "../../Constant/path";
+import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 function Header() {
-    const [user, setUser] = useState(null); // Thay đổi initial state thành null
+    const [user, setUser] = useState(null);
+    const navigate = useNavigate()
     useEffect(() => {
+        const idUser = localStorage.getItem('userId');
         const fetchUser = async () => {
             try {
                 const response = await userApi.getUserById(idUser);
                 if (response) {
-                    setUser(response); // Đảm bảo truy cập đúng thuộc tính của response
+                    setUser(response);
                 } else {
-                    setUser(null); // Đặt lại thành null nếu không tìm thấy người dùng
+                    setUser(null);
                 }
             } catch (error) {
                 console.error('Error fetching user:', error);
-                setUser(null); // Đặt lại thành null nếu có lỗi xảy ra
+                setUser(null);
             }
         };
 
         fetchUser();
     }, []);
+
+    const handleLogout = () => {
+        localStorage.removeItem('userId');
+        setUser(null);
+        navigate('/login');
+    };
 
     return (
         <div>
@@ -36,17 +45,23 @@ function Header() {
                 </div>
                 <div className={`${styles["All-Category"]}`}>
                     <ul className="d-flex m-0 gap-5 text-uppercase fs-6 fw-semibold" style={{ listStyle: 'none' }}>
-                        <li className={`${styles["Men"]}`}>Trang chủ</li>
-                        <li className={`${styles["Men"]}`}>Hạt giống</li>
-                        <li className={`${styles["Men"]}`}>Về chúng tôi</li>
+                        <Link className="text-white" to={path.home} style={{textDecoration: 'none'}}>
+                            <li className={`${styles["Men"]}`}>Trang chủ</li>
+                        </Link>
+                        <Link className="text-white" to={path.products} style={{textDecoration: 'none'}}>
+                            <li className={`${styles["Men"]}`}>Hạt giống</li>
+                        </Link>
+                        <Link className="text-white" style={{textDecoration: 'none'}}>
+                            <li className={`${styles["Men"]}`}>Về chúng tôi</li>
+                        </Link>
                         <li className={`${styles["Men"]}`}>Đặt hàng</li>
                         <li className={`${styles["Men"]}`}>Liên hệ</li>
                     </ul>
                 </div>
                 <div className="d-flex gap-5 me-4">
-                    <button className={`${styles["search_glass"]} border-0 bg-transparent`}>
-                        <FontAwesomeIcon icon={faSearch} style={{ color: '#fff' }} />
-                    </button>
+                    <Link to={path.searchProducts} className={`${styles["search_glass"]} border-0 bg-transparent`} style={{textDecoration: 'none'}}>
+                        <FontAwesomeIcon className="f-s-18" icon={faSearch} style={{ color: '#fff' }} />
+                    </Link>
                     <button
                         data-bs-toggle="offcanvas"
                         data-bs-target="#offcanvasRight"
@@ -59,9 +74,15 @@ function Header() {
                             </div>
                         )}
                     </button>
-                    <button className={`border-0 bg-transparent ${styles["fs-5"]}`}>
-                        <FontAwesomeIcon icon={faUser} className='text-white' />
-                    </button>
+                    {user ? (
+                        <button onClick={handleLogout} className={`border-0 text-white bg-transparent ${styles["fs-5"]}`}>
+                            Đăng xuất
+                        </button>
+                    ) : (
+                        <Link to={path.login} className={`text-white ${styles["fs-5"]}`} style={{ textDecoration: 'none' }}>
+                            Đăng nhập
+                        </Link>
+                    )}
                 </div>
             </div>
             <Cart />

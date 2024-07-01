@@ -5,10 +5,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import userApi from '../../api/userApi';
 
-const idUser = localStorage.getItem('userId');
 
+const idUser = localStorage.getItem('userId');
 function CartItem({ data, onUpdateCart }) {
-  const [product, setProduct] = useState(null);
+    const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(data.quantity);
   const [total, setTotal] = useState(data.total);
 

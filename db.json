@@ -5,26 +5,7 @@
       "username": "vanh",
       "email": "vanh@gmail.com",
       "password": "111",
-      "cart": [
-        {
-          "id": "6185616605359",
-          "seeds": 6,
-          "quantity": 4,
-          "total": 40.9
-        },
-        {
-          "id": "6188142493871",
-          "seeds": 6,
-          "quantity": 3,
-          "total": 19.53
-        },
-        {
-          "id": "6184820506799",
-          "seeds": 3,
-          "quantity": 1,
-          "total": 2.89
-        }
-      ],
+      "cart": [],
       "historyProduct": [],
       "orderProduct": []
     },
