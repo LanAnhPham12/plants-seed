@@ -16,7 +16,6 @@ import { useNavigate } from 'react-router-dom';
 
 const randomScore = Math.floor(Math.random() * 3) + 3; // Random score between 3 and 5
 const randomReviews = Math.floor(Math.random() * 30) + 1; // Random number of reviews between 1 and 30
-const idUser = localStorage.getItem('userId');
 
 function ProductDetail() {
     const [product, setProduct] = useState(null); // Sử dụng null thay vì []
@@ -39,6 +38,7 @@ function ProductDetail() {
     }, [id]); // Thêm id vào dependency array để useEffect chạy lại khi id thay đổi
 
     useEffect(() => {
+        const idUser = localStorage.getItem('userId');
         const fetchUser = async () => {
             try {
                 const response = await userApi.getUserById(idUser);

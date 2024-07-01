@@ -3,14 +3,15 @@ import styles from './Cart.module.css';
 import CartItem from './CartItem';
 import userApi from '../../api/userApi';
 import { Link } from 'react-router-dom';
+import path from '../../Constant/path';
 
-const idUser = localStorage.getItem('userId');
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [total, setTotal] = useState(0);
-
+  
   useEffect(() => {
+    const idUser = localStorage.getItem('userId');
     const fetchCartItems = async () => {
       try {
         const userId = idUser;
@@ -65,7 +66,7 @@ const Cart = () => {
                €{total.toFixed(2)}
               </div>
             </div>
-            <Link style={{textDecoration: 'none'}} >
+            <Link to={path.checkout} style={{textDecoration: 'none'}} >
             <div className='mt-3'>
               <button className={`${styles.btnCheckOut} py-3 w-100 f-s-18 text-white`}>Thanh toán</button>
             </div>

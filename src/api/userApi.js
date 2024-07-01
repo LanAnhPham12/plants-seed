@@ -145,6 +145,17 @@ const userApi = {
       throw error;
     }
   },
+  deleteAllCartItem: async (userId) => {
+    try {
+      const user = await userApi.getUserById(userId);
+      const updatedUser = { ...user, cart: [] };
+      const response = await userApi.editUser(userId, updatedUser);
+      return response;
+    } catch (error) {
+      console.error("Error deleting all cart items:", error);
+      throw error;
+    }
+  },
 };
 
 export default userApi;

@@ -1,3 +1,10 @@
-.box {
-    margin: auto;
+.btnOrder {
+  border: none;
+  border-radius: 10px;
+  background-color: #068647;
+}
+.btnOrder:hover {
+  border: none;
+  border-radius: 10px;
+  background-color: #046134;
 }
