@@ -632,3 +632,18 @@ input:focus, textarea:focus{
   border-color: #046a38;
   box-shadow: 0 0 0 1px #046a38;
 }
+
+input, textarea{
+  background-color: white;
+  color: #333333;
+  border-color: #d9d9d9;
+  border: 1px solid #d9d9d9;
+  background-clip: padding-box;
+  border-radius: 5px;
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 8px;
+  word-break: normal;
+  line-height: inherit;
+}
