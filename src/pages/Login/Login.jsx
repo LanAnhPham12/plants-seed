@@ -112,6 +112,7 @@ const Login = () => {
             <div className={styles['input-field']}>
               <i className="fas fa-user"></i>
               <input
+                className={`${styles['input-xxx']}`}
                 type="text"
                 placeholder="Tài khoản"
                 value={usernameLogin}
@@ -122,6 +123,7 @@ const Login = () => {
             <div className={styles['input-field']}>
               <i className="fas fa-lock"></i>
               <input
+                className={`${styles['input-xxx']}`}
                 type="password"
                 placeholder="Mật khẩu"
                 value={passwordLogin}
@@ -137,6 +139,7 @@ const Login = () => {
             <div className={styles['input-field']}>
               <i className="fas fa-user"></i>
               <input
+                className={`${styles['input-xxx']}`}
                 type="text"
                 placeholder="Tài khoản"
                 value={username}
@@ -147,6 +150,7 @@ const Login = () => {
             <div className={styles['input-field']}>
               <i className="fas fa-envelope"></i>
               <input
+                className={`${styles['input-xxx']}`}
                 type="email"
                 placeholder="Email"
                 value={email}
@@ -157,6 +161,7 @@ const Login = () => {
             <div className={styles['input-field']}>
               <i className="fas fa-lock"></i>
               <input
+                className={`${styles['input-xxx']}`}
                 type="password"
                 placeholder="Mật khẩu"
                 value={password}

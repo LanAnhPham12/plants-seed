@@ -327,3 +327,9 @@ form.sign-in-form {
     left: 50%;
   }
 }
+
+.input-xxx:focus{
+  border: none; 
+  box-shadow: 0 0 0 1px #f0f0f0;
+  outline: none;
+}
