@@ -5,7 +5,14 @@
       "username": "vanh",
       "email": "vanh@gmail.com",
       "password": "111",
-      "cart": [],
+      "cart": [
+        {
+          "id": "6628791877807",
+          "seeds": 3,
+          "quantity": 1,
+          "total": 4.39
+        }
+      ],
       "historyProduct": [],
       "orderProduct": []
     },
@@ -14,7 +21,20 @@
       "username": "hoanganh",
       "email": "hoanganh@gmail.com",
       "password": "111",
-      "cart": [],
+      "cart": [
+        {
+          "id": "6289182621871",
+          "seeds": 3,
+          "quantity": 1,
+          "total": 2.69
+        },
+        {
+          "id": "6628791877807",
+          "seeds": 3,
+          "quantity": 1,
+          "total": 4.39
+        }
+      ],
       "historyProduct": [],
       "orderProduct": []
     },

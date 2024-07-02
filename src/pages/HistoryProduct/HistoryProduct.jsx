@@ -1,38 +1,54 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import productApi from '../../api/productApi';
+import userApi from '../../api/userApi';
+import Product from '../ProductList/Product/Product';
+import { Link } from 'react-router-dom';
+import path from '../../Constant/path';
+
 function HistoryProduct() {
-    // const [products, setProducts] = useState([]);
+    const [products, setProducts] = useState([]);
+
     useEffect(() => {
-        const fetchProducts = async () => {
+        const fetchHistoryProducts = async () => {
+            const userId = localStorage.getItem('userId');
             try {
-                console.log('Fetching products from API...');
-                const response = await productApi.getProductById("6184820506799");
-                console.log('Items from API:', response);
-                // if (Array.isArray(response) && response.length > 0) {
-                //     setProducts(response);
-                //     console.log('Products set successfully:', response);
-                // } else {
-                //     console.log('API response is not valid or empty:', response);
-                //     setProducts([]);
-                // }
+                const userData = await userApi.getUserById(userId);
+                const productPromises = userData.historyProduct.map(productId => 
+                    productApi.getProductById(productId)
+                );
+                const productsData = await Promise.all(productPromises);
+                setProducts(productsData.reverse());
             } catch (error) {
-                console.error('Error fetching products:', error);
-                // Handle error state or logging as needed
+                console.error('Error fetching history products:', error);
             }
         };
 
-        fetchProducts();
+        fetchHistoryProducts();
     }, []);
 
-
     return ( 
-        <div>
+        <div style={{maxHeight: '100vh'}}>
             <Header />
-
-
-            <Footer/>
+            <div className="container mt-5 pt-3">
+                {products.length > 0 ? (
+                    <>
+                        <div className="text-center mb-4 f-s-32 f-f-Cardo-Semibold text-success mt-5">Lịch sử đã xem</div>
+                        <div className="row row-cols-4 px-5 g-4 gy-5 text-center">
+                            {products.map((product, index) => (
+                                <Product key={index} dataProduct={product} />
+                            ))}
+                        </div>
+                    </>
+                ) : (
+                    <div className="text-center f-s-24 text-success my-5 py-4">
+                        Bạn chưa xem sản phẩm nào.<br />
+                        Vui lòng tham khảo <Link to={path.products} className='text-success f-s-24'>Tại đây</Link>
+                    </div>
+                )}
+            </div>
+            <Footer />
         </div>
      );
 }

@@ -156,6 +156,37 @@ const userApi = {
       throw error;
     }
   },
+  addHistory: async (userId, productId) => {
+    try {
+      const user = await userApi.getUserById(userId);
+      const existingProductIndex = user.historyProduct.indexOf(productId);
+
+      let updatedHistoryProduct;
+      if (existingProductIndex !== -1) {
+        // Nếu sản phẩm đã tồn tại, xóa sản phẩm khỏi lịch sử
+        updatedHistoryProduct = [
+          ...user.historyProduct.slice(0, existingProductIndex),
+          ...user.historyProduct.slice(existingProductIndex + 1),
+        ];
+      } else {
+        updatedHistoryProduct = [...user.historyProduct];
+      }
+
+      // Thêm sản phẩm vào cuối danh sách lịch sử
+      updatedHistoryProduct.push(productId);
+
+      const updatedUser = {
+        ...user,
+        historyProduct: updatedHistoryProduct,
+      };
+
+      const response = await userApi.editUser(userId, updatedUser);
+      return response;
+    } catch (error) {
+      console.error("Error adding to history:", error);
+      throw error;
+    }
+  },
 };
 
 export default userApi;
