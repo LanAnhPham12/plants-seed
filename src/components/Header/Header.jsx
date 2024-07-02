@@ -54,7 +54,9 @@ function Header() {
                         <Link className="text-white" style={{textDecoration: 'none'}}>
                             <li className={`${styles["Men"]}`}>Về chúng tôi</li>
                         </Link>
-                        <li className={`${styles["Men"]}`}>Đặt hàng</li>
+                        <Link to={path.checkout} className="text-white" style={{textDecoration: 'none'}}>
+                            <li className={`${styles["Men"]}`}>Đặt hàng</li>
+                        </Link>
                         <Link to={path.historyProducts} className="text-white" style={{textDecoration: 'none'}}>
                             <li className={`${styles["Men"]}`}>Lịch sử</li>
                         </Link>
