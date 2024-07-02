@@ -1,9 +1,12 @@
-import CheckoutItem from './Product/CheckoutItem';
+import React, { useEffect, useState } from 'react';
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
 import userApi from '../../api/userApi';
-import { useEffect, useState } from 'react';
+import CheckoutItem from './Product/CheckoutItem';
 import Swal from 'sweetalert2';
-import styles from './checkout.module.css'
+import styles from './checkout.module.css';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import path from '../../Constant/path';
 
 function Checkout() {
@@ -78,6 +81,7 @@ function Checkout() {
 
     return (
         <div>
+            <Header />
             <div className='container'>
                 <div className='row text-success justify-content-center'>
                     <div className='col-6 pt-5'>
@@ -159,33 +163,42 @@ function Checkout() {
                             ></textarea>
                         </div>
                     </div>
-                    <div className="col-4 border-left border-start pt-3" style={{ backgroundColor: '#f5f5f5' }}>
+                    <div className="col-4 border-left border-start pt-4 mt-5" style={{ backgroundColor: '#f5f5f5' }}>
                         <div className='w-100 m-auto'>
-                            {checkoutItems.map((item, index) => (
-                                <CheckoutItem key={index} data={item} />
-                            ))}
-                            <div className='mt-4' style={{ borderBottom: '1px solid green' }}></div>
-                            <div className="container">
-                                <div className='row justify-content-around mt-3'>
-                                    <h5 className='f-f-Cardo-Bold col-8'>Tổng</h5>
-                                    <h4 className='f-f-Cardo-Bold col-4 text-center'>€ {total.toFixed(2)}</h4>
-                                </div>
-                                <div className="row mt-2">
-                                    <div className="col">
-                                        <button
-                                            className={`${styles.btnOrder} py-3 w-100 f-s-18 text-white`}
-                                            onClick={handleOrder}
-                                        >
-                                            Đặt hàng
-                                        </button>
+                            {checkoutItems.length > 0 ? (
+                                <>
+                                    {checkoutItems.map((item, index) => (
+                                        <CheckoutItem key={index} data={item} />
+                                    ))}
+                                    <div className='mt-4' style={{ borderBottom: '1px solid green' }}></div>
+                                    <div className="container">
+                                        <div className='row justify-content-around mt-3'>
+                                            <h5 className='f-f-Cardo-Bold col-8'>Tổng</h5>
+                                            <h4 className='f-f-Cardo-Bold col-4 text-center'>€ {total.toFixed(2)}</h4>
+                                        </div>
+                                        <div className="row mt-2">
+                                            <div className="col">
+                                                <button
+                                                    className={`${styles.btnOrder} py-3 w-100 f-s-18 text-white`}
+                                                    onClick={handleOrder}
+                                                >
+                                                    Đặt hàng
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
+                                </>
+                            ) : (
+                                <div className="text-center">
+                                    <h5 className='f-f-Cardo-Bold mt-5'>Bạn chưa thêm sản phẩm nào.</h5>
+                                    <p>Vui lòng tham khảo thêm <Link to={path.products} className='text-success'>tại đây</Link></p>
                                 </div>
-                                <button className="btn f-f-Cardo-Bold me-4 mt-4" style={{ float:'right' ,backgroundColor: '#068647', borderColor: '#068647', color: '#fff', padding: '8px 15px'}}>Xác nhận đặt hàng</button>
-                            </div>
+                            )}
                         </div>
                     </div>
                 </div>
             </div>
+            <Footer />
         </div>
     );
 }

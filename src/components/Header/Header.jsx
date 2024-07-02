@@ -54,8 +54,12 @@ function Header() {
                         <Link className="text-white" style={{textDecoration: 'none'}}>
                             <li className={`${styles["Men"]}`}>Về chúng tôi</li>
                         </Link>
-                        <li className={`${styles["Men"]}`}>Đặt hàng</li>
-                        <li className={`${styles["Men"]}`}>Liên hệ</li>
+                        <Link to={path.checkout} className="text-white" style={{textDecoration: 'none'}}>
+                            <li className={`${styles["Men"]}`}>Đặt hàng</li>
+                        </Link>
+                        <Link to={path.historyProducts} className="text-white" style={{textDecoration: 'none'}}>
+                            <li className={`${styles["Men"]}`}>Lịch sử</li>
+                        </Link>
                     </ul>
                 </div>
                 <div className="d-flex gap-5 me-4">
