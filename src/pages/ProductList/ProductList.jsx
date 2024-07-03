@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import Product from './Product/Product';
 import productApi from '../../api/productApi';
-import styles from '../ProductList/ProductList.module.css'
+import styles from '../ProductList/ProductList.module.css';
 
 function ProductList() {
     const [products, setProducts] = useState([]);
@@ -29,15 +29,18 @@ function ProductList() {
         fetchProducts();
     }, []);
     
-    const currentProducts = products.find((item) => item.page === currentPage)?.jsonObject.collection.productVariants || [];
+    const currentProducts = useMemo(() => {
+        const currentPageData = products.find((item) => item.page === currentPage);
+        return currentPageData ? currentPageData.jsonObject.collection.productVariants : [];
+    }, [products, currentPage]);
 
-    // Tính toán tổng số trang
-    const totalPages = Math.ceil(products.length);
+    // Calculate total pages
+    const totalPages = useMemo(() => Math.ceil(products.length), [products]);
 
-    // Render số trang
-    const renderPageNumbers = () => {
+    // Render page numbers
+    const renderPageNumbers = useMemo(() => {
         const pageNumbers = [];
-        const maxPageButtons = 5; // Giới hạn số lượng button chuyển trang
+        const maxPageButtons = 5; // Limit the number of page buttons
         const startPage = Math.max(1, currentPage - Math.floor(maxPageButtons / 2));
         const endPage = Math.min(startPage + maxPageButtons - 1, totalPages);
 
@@ -46,43 +49,37 @@ function ProductList() {
                 <button
                     key={i}
                     onClick={() => setCurrentPage(i)}
-                    className={`btn mx-1  ${currentPage === i ? styles['bg-green'] :styles['bg-grey'] }`}
-                    >
+                    className={`btn mx-1 ${currentPage === i ? styles['bg-green'] : styles['bg-grey']}`}
+                >
                     {i}
                 </button>
             );
         }
         return pageNumbers;
-    };
+    }, [currentPage, totalPages]);
 
-
-    // Xử lý sự kiện sắp xếp theo tên
+    // Handle sort by name
     const sortByNameHandler = (e) => {
         setSortByName(e.target.value);
         setSortByPrice(null);
     };
 
-    // Xử lý sự kiện sắp xếp theo giá
+    // Handle sort by price
     const sortByPriceHandler = (e) => {
         setSortByPrice(e.target.value);
         setSortByName(null);
     };
 
- // Sắp xếp sản phẩm hiện tại theo tên hoặc giá
-    const sortByNameAsc = (a, b) => a.product.title.localeCompare(b.product.title);
-    const sortByNameDesc = (a, b) => b.product.title.localeCompare(a.product.title);
-    const sortByPriceAsc = (a, b) => a.price.amount - b.price.amount;
-    const sortByPriceDesc = (a, b) => b.price.amount - a.price.amount;
-
-    let sortedProducts = [...currentProducts];
-
-    if (sortByName) {
-        sortedProducts.sort(sortByName === 'asc' ? sortByNameAsc : sortByNameDesc);
-    } else if (sortByPrice) {
-        sortedProducts.sort(sortByPrice === 'asc' ? sortByPriceAsc : sortByPriceDesc);
-    }
-
-
+    // Sort current products by name or price
+    const sortedProducts = useMemo(() => {
+        const sorted = [...currentProducts];
+        if (sortByName) {
+            sorted.sort(sortByName === 'asc' ? (a, b) => a.product.title.localeCompare(b.product.title) : (a, b) => b.product.title.localeCompare(a.product.title));
+        } else if (sortByPrice) {
+            sorted.sort(sortByPrice === 'asc' ? (a, b) => a.price.amount - b.price.amount : (a, b) => b.price.amount - a.price.amount);
+        }
+        return sorted;
+    }, [currentProducts, sortByName, sortByPrice]);
 
     return (
         <div>
@@ -143,7 +140,7 @@ function ProductList() {
                     >
                         Trước
                     </button>
-                    {renderPageNumbers()}
+                    {renderPageNumbers}
                     <button
                         className={`btn ${styles['bg-grey']} ${styles['text-green']} mx-1`}
                         disabled={currentPage === totalPages}

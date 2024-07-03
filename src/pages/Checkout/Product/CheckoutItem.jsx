@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import productApi from '../../../api/productApi';
 
-function CheckoutItem({data}) {
+function CheckoutItem({ data }) {
     const [product, setProduct] = useState(null);
 
     useEffect(() => {
@@ -14,14 +14,16 @@ function CheckoutItem({data}) {
             }
         };
 
-        fetchProduct();
-    }, [data.id]);
+        // Fetch product data only on mount
+        if (!product) {
+            fetchProduct();
+        }
+    }, [data.id, product]); // Only run effect if data.id changes or product is null
 
     if (!product) {
         return <div>Loading...</div>;
     }
-    console.log(data);
-    console.log(product);
+
     return ( 
         <div className="row my-3 mx-auto justify-content-center align-items-start text-success">
             <div className="d-flex align-items-center col-2 py-3" style={{backgroundColor:'#fff', borderRadius: '4px', border: '1px solid #ccc'}} >

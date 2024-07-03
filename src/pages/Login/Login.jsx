@@ -93,6 +93,7 @@ const Login = () => {
             timerProgressBar: false, // Hiển thị thanh tiến trình đếm ngược
         });
         navigate(path.home);
+        window.location.reload()
       } catch (error) {
         console.error('Login Error:', error);
         Swal.fire({

@@ -5,6 +5,7 @@ import styles from './home.module.css'
 import { Link } from 'react-router-dom';
 import Product from '../ProductList/Product/Product';
 import productApi from '../../api/productApi';
+import path from "../../Constant/path";
 
 
 
@@ -46,7 +47,11 @@ function Home() {
                     </div>
                     Lấy cảm hứng từ Bộ sưu tập rau, thảo mộc, hoa, hạt kỳ lạ, hạt cọ và hạt tre tươi của chúng tôi!
                     
-                    <div><button className={` ${styles.btnn} btn mt-5 f-f-Cardo-Bold`}>Xem thêm</button></div>
+                    <div>
+                      <Link to={path.products}>
+                        <button className={` ${styles.btnn} btn mt-5 f-f-Cardo-Bold`}>Xem thêm</button>
+                      </Link>
+                      </div>
                 </div>
             </div>
 
@@ -106,7 +111,7 @@ function Home() {
                 </div>
                 <div className="row mt-5">
                   <div className="col-4">
-                    <Link to="">
+                    <Link to={path.products}>
                       <div className={`${styles["img"]} position-relative`} style={{ backgroundImage: `url('https://www.gardenparadiseseeds.com/cdn/shop/collections/tropical-exotic-seeds-768892.jpg?v=1691375736')` }}>
                           <div className={`${styles["xxx"]} position-absolute text-center f-s-18 f-f-Cardo-Semibold text-white`}>
                           Vegetable
@@ -117,7 +122,7 @@ function Home() {
                     </Link>
                   </div>
                   <div className="col-4">
-                    <Link to="">
+                    <Link to={path.products}>
                       <div className={`${styles["img"]} position-relative`} style={{ backgroundImage: `url('https://www.gardenparadiseseeds.com/cdn/shop/collections/vegetable-seeds-588104_900x.jpg?v=1691375773')` }}>
                           <div className={`${styles["xxx"]} position-absolute text-center f-s-18 f-f-Cardo-Semibold text-white`} >
                           Palm and BamBook seeds
@@ -128,7 +133,7 @@ function Home() {
                     </Link>
                   </div>
                   <div className="col-4">
-                    <Link to="">
+                    <Link to={path.products}>
                       <div className={`${styles["img"]} position-relative`} style={{ backgroundImage: `url('https://www.gardenparadiseseeds.com/cdn/shop/collections/tropical-exotic-seeds-768892.jpg?v=1691375736')` }}>
                           <div className={`${styles["xxx"]} position-absolute text-center f-s-18 f-f-Cardo-Semibold text-white`}>
                           Flower Seeds
@@ -139,7 +144,7 @@ function Home() {
                     </Link>
                   </div>
                 </div>
-                <Link to="">
+                <Link to={path.products}>
                       <div className={`${styles["img"]} position-relative`} style={{ backgroundImage: `url('https://www.gardenparadiseseeds.com/cdn/shop/collections/mixed-sort-of-seeds-676687.jpg?v=1691375741')` }}>
                           <div className={`${styles["xxx"]} position-absolute text-center f-s-18 f-f-Cardo-Semibold text-white`} >
                           Flower Seeds

@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import styles from './Cart.module.css';
 import CartItem from './CartItem';
 import userApi from '../../api/userApi';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import path from '../../Constant/path';
 
 const Cart = () => {
     const [cartItems, setCartItems] = useState([]);
     const [total, setTotal] = useState(0);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const idUser = localStorage.getItem('userId');
@@ -41,15 +42,21 @@ const Cart = () => {
         setCartItems(updatedCartItems);
     };
 
+    const handleCheckout = () => {
+        // Redirect to Checkout and reload
+        navigate(path.checkout, { replace: true });
+        window.location.reload();
+    };
+
     return (
         <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
             <div className="offcanvas-header" style={{ border: '1px solid green' }}>
-                <div className='text-success f-s-26 f-f-Cardo-Semibold' id="offcanvasRightLabel">Giỏ hàng ({cartItems.length})</div>
+                <div className='text-success f-s-26 f-f-Cardo-Semibold' id="offcanvasRightLabel">Giỏ hàng ({cartItems.length})</div>
                 <button type="button" className={`btn-close me-2 ${styles.btnClose}`} data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div className="offcanvas-body">
                 {cartItems.length === 0 ? (
-                    <p className='f-s-20'>Không có sản phẩm trong giỏ hàng</p>
+                    <p className='f-s-20'>Không có sản phẩm trong giỏ hàng</p>
                 ) : (
                     <>
                         <ul className="list-group">
@@ -58,14 +65,12 @@ const Cart = () => {
                             ))}
                         </ul>
                         <div className='py-4 d-flex justify-content-between' style={{ borderBottom: '1px solid green' }}>
-                            <div className='f-s-28 f-f-Cardo-Semibold text-success'>Tổng</div>
+                            <div className='f-s-28 f-f-Cardo-Semibold text-success'>Tổng</div>
                             <div className='f-s-28 f-f-Cardo-Semibold text-success'>€{total.toFixed(2)}</div>
                         </div>
-                        <Link to={path.checkout} style={{ textDecoration: 'none' }}>
-                            <div className='mt-3'>
-                                <button className={`${styles.btnCheckOut} py-3 w-100 f-s-18 text-white`}>Thanh toán</button>
-                            </div>
-                        </Link>
+                        <div className='mt-3'>
+                            <button className={`${styles.btnCheckOut} py-3 w-100 f-s-18 text-white`} onClick={handleCheckout}>Thanh toán</button>
+                        </div>
                     </>
                 )}
             </div>

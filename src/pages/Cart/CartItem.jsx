@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import userApi from '../../api/userApi';
 import productApi from '../../api/productApi';
+
 const idUser = localStorage.getItem('userId');
 
 function CartItem({ data, onUpdateCart }) {
@@ -24,22 +25,25 @@ function CartItem({ data, onUpdateCart }) {
         fetchProduct();
     }, [data.id]);
 
+    useEffect(() => {
+        if (product) {
+            const newTotal = product.price.amount * data.seeds * quantity;
+            setTotal(newTotal);
+        }
+    }, [quantity, product, data.seeds]);
+
     const handleDecrease = () => {
         if (quantity > 1) {
             const newQuantity = quantity - 1;
             setQuantity(newQuantity);
-            const newTotal = product.price.amount * data.seeds * newQuantity;
-            setTotal(newTotal);
-            updateCart(newQuantity, newTotal);
+            updateCart(newQuantity);
         }
     };
 
     const handleIncrease = () => {
         const newQuantity = quantity + 1;
         setQuantity(newQuantity);
-        const newTotal = product.price.amount * data.seeds * newQuantity;
-        setTotal(newTotal);
-        updateCart(newQuantity, newTotal);
+        updateCart(newQuantity);
     };
 
     const handleDeleteFromCart = async () => {
@@ -49,19 +53,20 @@ function CartItem({ data, onUpdateCart }) {
             await userApi.deleteFromCart(userId, itemId);
 
             // Call parent component to update cart items
-            const updatedUser = await userApi.getUserById(userId); // Assuming this fetches updated cart items
+            const updatedUser = await userApi.getUserById(userId);
             onUpdateCart(updatedUser.cart);
         } catch (error) {
             console.error('Error deleting item from cart:', error);
         }
     };
 
-    const updateCart = async (newQuantity, newTotal) => {
+    const updateCart = async (newQuantity) => {
         try {
             const userId = idUser;
             const itemId = data.id;
+            const newTotal = product.price.amount * data.seeds * newQuantity;
             await userApi.editCart(userId, itemId, newQuantity, newTotal);
-            const updatedUser = await userApi.getUserById(userId); // Assuming this fetches updated cart items
+            const updatedUser = await userApi.getUserById(userId);
             onUpdateCart(updatedUser.cart);
         } catch (error) {
             console.error('Error updating cart item:', error);

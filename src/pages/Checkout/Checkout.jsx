@@ -12,8 +12,6 @@ import path from '../../Constant/path';
 function Checkout() {
     const [checkoutItems, setCheckoutItems] = useState([]);
     const [total, setTotal] = useState(0);
-    const navigate = useNavigate();
-
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [lastName, setLastName] = useState('');
@@ -23,6 +21,7 @@ function Checkout() {
     const [ward, setWard] = useState('');
     const [address, setAddress] = useState('');
     const [notes, setNotes] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchCheckoutItems = async () => {
@@ -36,7 +35,7 @@ function Checkout() {
         };
 
         fetchCheckoutItems();
-    }, []);
+    }, []); // Empty dependency array ensures this runs only once on mount
 
     useEffect(() => {
         const calculateTotal = () => {
@@ -45,7 +44,7 @@ function Checkout() {
         };
 
         calculateTotal();
-    }, [checkoutItems]);
+    }, [checkoutItems]); // Update total whenever checkoutItems change
 
     const handleOrder = async () => {
         if (!email || !phone || !lastName || !firstName || !province || !district || !ward || !address) {
@@ -59,20 +58,22 @@ function Checkout() {
 
         const userId = localStorage.getItem('userId');
         try {
-            // Hiển thị thông báo thành công
+            // Display success message
             await Swal.fire({
                 icon: 'success',
-                title: 'Đặt hàng thành công',
+                title: 'Đặt hàng thành công',
                 showConfirmButton: false,
                 timer: 2000
             });
 
-            // Gọi API để xóa tất cả các mục trong giỏ hàng
+            // Call API to delete all cart items
             await userApi.deleteAllCartItem(userId);
 
-            // Xóa các mục trong giỏ hàng tại giao diện
+            // Clear cart items in UI
             setCheckoutItems([]);
             setTotal(0);
+
+            // Navigate to home page
             navigate(path.home);
         } catch (error) {
             console.error("Error processing order:", error);
@@ -173,7 +174,7 @@ function Checkout() {
                                     <div className='mt-4' style={{ borderBottom: '1px solid green' }}></div>
                                     <div className="container">
                                         <div className='row justify-content-around mt-3'>
-                                            <h5 className='f-f-Cardo-Bold col-8'>Tổng</h5>
+                                            <h5 className='f-f-Cardo-Bold col-8'>Tổng</h5>
                                             <h4 className='f-f-Cardo-Bold col-4 text-center'>€ {total.toFixed(2)}</h4>
                                         </div>
                                         <div className="row mt-2">
@@ -182,7 +183,7 @@ function Checkout() {
                                                     className={`${styles.btnOrder} py-3 w-100 f-s-18 text-white`}
                                                     onClick={handleOrder}
                                                 >
-                                                    Đặt hàng
+                                                    Đặt hàng
                                                 </button>
                                             </div>
                                         </div>
@@ -190,8 +191,8 @@ function Checkout() {
                                 </>
                             ) : (
                                 <div className="text-center">
-                                    <h5 className='f-f-Cardo-Bold mt-5'>Bạn chưa thêm sản phẩm nào.</h5>
-                                    <p>Vui lòng tham khảo thêm <Link to={path.products} className='text-success'>tại đây</Link></p>
+                                    <h5 className='f-f-Cardo-Bold mt-5'>Bạn chưa thêm sản phẩm nào.</h5>
+                                    <p>Vui lòng tham khảo thêm <Link to={path.products} className='text-success'>tại đây</Link></p>
                                 </div>
                             )}
                         </div>

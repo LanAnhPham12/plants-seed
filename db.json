@@ -14,19 +14,8 @@
       "username": "hoanganh",
       "email": "hoanganh@gmail.com",
       "password": "111",
-      "cart": [
-        {
-          "id": "6185616605359",
-          "seeds": 3,
-          "quantity": 1,
-          "total": 4.09
-        }
-      ],
-      "historyProduct": [
-        "6628791877807",
-        "6188142493871",
-        "6185616605359"
-      ],
+      "cart": [],
+      "historyProduct": [],
       "orderProduct": []
     },
     {
