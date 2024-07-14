@@ -6,7 +6,10 @@
       "email": "vanh@gmail.com",
       "password": "111",
       "cart": [],
-      "historyProduct": [],
+      "historyProduct": [
+        "6184820506799",
+        "6628791877807"
+      ],
       "orderProduct": []
     },
     {
@@ -25,23 +28,6 @@
       "password": "111",
       "cart": [],
       "historyProduct": [],
-      "orderProduct": []
-    },
-    {
-      "id": "8e72",
-      "username": "555",
-      "email": "u@huhu.com",
-      "password": "123",
-      "cart": [],
-      "historyProduct": [
-        "6999292215471",
-        "6289176920239",
-        "6608479846575",
-        "6289156833455",
-        "6184820506799",
-        "6185616605359",
-        "6628791877807"
-      ],
       "orderProduct": []
     }
   ],

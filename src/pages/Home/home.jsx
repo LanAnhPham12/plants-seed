@@ -43,7 +43,7 @@ function Home() {
           <div className={` ${styles.banner} position-relative d-flex justify-content-center align-items-center mt-5 pt-4`}>
                 <div className="position-absolute text-center col-8 text-white f-s-18 f-f-Cardo-Semibold">
                     <div className="f-s-55 f-f-Cardo-Bold">
-                    Khám phá bộ sưu tập hạt giống hữu cơ được chọn lọc kỹ càng nhất từ ​​vườn gia truyền cho Ốc đảo xanh của bạn!
+                    Khám phá bộ sưu tập cây giống hữu cơ được chọn lọc kỹ càng nhất từ ​​vườn gia truyền cho Ốc đảo xanh của bạn!
                     </div>
                     Lấy cảm hứng từ Bộ sưu tập rau, thảo mộc, hoa, hạt kỳ lạ, hạt cọ và hạt tre tươi của chúng tôi!
                     

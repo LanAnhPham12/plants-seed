@@ -10,7 +10,7 @@ function ProductList() {
     const [currentPage, setCurrentPage] = useState(1);
     const [sortByName, setSortByName] = useState(null);
     const [sortByPrice, setSortByPrice] = useState(null);
-
+    const [typeList, setTypeList] = useState([]);
     useEffect(() => {
         const fetchProducts = async () => {
             try {
