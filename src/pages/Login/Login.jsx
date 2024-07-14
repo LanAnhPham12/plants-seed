@@ -85,6 +85,8 @@ const Login = () => {
         const response = await userApi.loginUser(userCredentials);
         console.log('Đăng nhập thành công:', response);
         localStorage.setItem('userId', response.user.id);
+
+        //   localStorage.setItem("User_status", JSON.stringify(response.message));
         await Swal.fire({
             icon: 'success',
             text: response.message,
@@ -94,6 +96,7 @@ const Login = () => {
         });
         navigate(path.home);
         window.location.reload()
+
       } catch (error) {
         console.error('Login Error:', error);
         Swal.fire({

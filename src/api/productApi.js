@@ -37,18 +37,30 @@ const productApi = {
     }
   },
   getProductDetail: async (productId) => {
+    const Visited_Items ="Visited_Items";
+    //tạo key
     try {
       const response = await axios.get(
         `${config.baseURL}${URL_GET_PRODUCT_DETAIL}`
       );
       const product = response.data.find((p) => p.id === productId);
 
+
       if (product) {
+
+        //local storage part
+        localStorage.setItem(Visited_Items, JSON.stringify(product.id));
+        let data=JSON.parse(localStorage.getItem(Visited_Items))
+        console.log("You have visited product: ", product.id);
+
         return {
           success: true,
           message: "Lấy chi tiết sản phẩm thành công",
           product: product,
+
         };
+
+
       }
     } catch (error) {
       console.error(error);

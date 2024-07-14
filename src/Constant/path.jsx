@@ -8,6 +8,8 @@ const path = {
     footer: '/footer',
     searchProducts: '/search',
     historyProducts: '/history',
+    instruction: '/instruction',
+    nopage:'*',
     homeWithId: (id) => `/home/${id}` // Thêm path home:id
 };
 

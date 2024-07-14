@@ -20,6 +20,7 @@ function HistoryProduct() {
                 );
                 const productsData = await Promise.all(productPromises);
                 setProducts(productsData.reverse());
+                console.log(productsData)
             } catch (error) {
                 console.error('Error fetching history products:', error);
             }

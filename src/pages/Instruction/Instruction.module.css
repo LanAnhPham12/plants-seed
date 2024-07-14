@@ -1,0 +1,12 @@
+
+.bodycontainer{
+    margin-top: 100px;
+    max-width: 960px;
+
+}
+.img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}

@@ -12,6 +12,8 @@ import Footer from "./components/Footer/Footer";
 import SearchProduct from "./pages/SearchProduct/SearchProduct";
 import HistoryProduct from "./pages/HistoryProduct/HistoryProduct";
 import ProductDetail from "./pages/ProductDetail/ProductDetail";
+import NoPage from "./pages/NoPage";
+import Instruction from "./pages/Instruction/Instruction";
 function App() {
   return (
     <Router>
@@ -25,6 +27,8 @@ function App() {
         <Route path={path.footer} element={<Footer />}></Route>
         <Route path={path.searchProducts} element={<SearchProduct />}></Route>
         <Route path={path.historyProducts} element={<HistoryProduct />}></Route>
+        <Route path={path.instruction} element={<Instruction />}></Route>
+        <Route path={path.nopage} element={<NoPage />}></Route>
       </Routes>
     </Router>
   );
