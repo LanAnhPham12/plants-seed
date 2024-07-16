@@ -36,6 +36,45 @@ const productApi = {
       throw error;
     }
   },
+  getAllProductTypes: async () => {
+    try {
+      const response = await axios.get(config.baseURL + URL_GET_ALL);
+      const productTypes = new Set();
+
+      response.data.forEach((product) => {
+        const productVariants = product?.jsonObject?.collection?.productVariants || [];
+        productVariants.forEach((variant) => {
+          productTypes.add(variant.product.type);
+        });
+      });
+
+      return Array.from(productTypes);
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  },
+  getProductByType: async (type) => {
+    try {
+      const response = await axios.get(config.baseURL + URL_GET_ALL);
+      const productsByType = [];
+
+      response.data.forEach((product) => {
+        const productVariants = product?.jsonObject?.collection?.productVariants || [];
+        productVariants.forEach((variant) => {
+          if (variant.product.type === type) {
+            productsByType.push(variant.product);
+          }
+        });
+      });
+
+      return productsByType;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  },
+
   getProductDetail: async (productId) => {
     const Visited_Items ="Visited_Items";
     //tạo key

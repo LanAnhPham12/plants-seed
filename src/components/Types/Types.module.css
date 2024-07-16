@@ -1,0 +1,20 @@
+
+.list{
+    list-style-type:none;
+    display: flex;
+
+   justify-content: center;
+
+}
+.list li{
+    font-weight: bold;
+    font-family: sans-serif;
+    font-size: 10pt;
+    padding: 10px 10px 0px 0px;
+    color: #282c34;
+}
+.list>li:hover{
+    font-size: 12pt;
+    color: #04552d;
+    transition: ease-in-out 0.5s;
+}
