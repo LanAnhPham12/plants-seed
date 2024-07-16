@@ -1,46 +1,47 @@
 import React, { useEffect, useState, useMemo } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchProducts } from '../../components/redux/productSlice';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import Product from './Product/Product';
-import productApi from '../../api/productApi';
 import styles from '../ProductList/ProductList.module.css';
+import Types from "../../components/Types/Types";
 
 function ProductList() {
-    const [products, setProducts] = useState([]);
+    const dispatch = useDispatch();
+    const products = useSelector((state) => state.products.items);
+    const status = useSelector((state) => state.products.status);
     const [currentPage, setCurrentPage] = useState(1);
     const [sortByName, setSortByName] = useState(null);
     const [sortByPrice, setSortByPrice] = useState(null);
-    const [typeList, setTypeList] = useState([]);
+    const [selectedType, setSelectedType] = useState(null);
+
     useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                const response = await productApi.getAllProducts();
-                if (Array.isArray(response) && response.length > 0) {
-                    setProducts(response);
-                } else {
-                    setProducts([]);
-                }
-            } catch (error) {
-                console.error('Error fetching products:', error);
-                // Handle error state or logging as needed
-            }
-        };
+        if (status === 'idle') {
+            dispatch(fetchProducts());
+        }
+    }, [status, dispatch]);
 
-        fetchProducts();
-    }, []);
-    
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [selectedType]);
+
+    const filteredProducts = useMemo(() => {
+        const allVariants = products.flatMap(product => product.jsonObject.collection.productVariants);
+        return selectedType ? allVariants.filter(variant => variant.product.type === selectedType) : allVariants;
+    }, [products, selectedType]);
+
+    const totalPages = useMemo(() => Math.ceil(filteredProducts.length / 10), [filteredProducts]);
+
     const currentProducts = useMemo(() => {
-        const currentPageData = products.find((item) => item.page === currentPage);
-        return currentPageData ? currentPageData.jsonObject.collection.productVariants : [];
-    }, [products, currentPage]);
+        const startIndex = (currentPage - 1) * 10;
+        const endIndex = startIndex + 10;
+        return filteredProducts.slice(startIndex, endIndex);
+    }, [filteredProducts, currentPage]);
 
-    // Calculate total pages
-    const totalPages = useMemo(() => Math.ceil(products.length), [products]);
-
-    // Render page numbers
     const renderPageNumbers = useMemo(() => {
         const pageNumbers = [];
-        const maxPageButtons = 5; // Limit the number of page buttons
+        const maxPageButtons = 5;
         const startPage = Math.max(1, currentPage - Math.floor(maxPageButtons / 2));
         const endPage = Math.min(startPage + maxPageButtons - 1, totalPages);
 
@@ -58,19 +59,16 @@ function ProductList() {
         return pageNumbers;
     }, [currentPage, totalPages]);
 
-    // Handle sort by name
     const sortByNameHandler = (e) => {
         setSortByName(e.target.value);
         setSortByPrice(null);
     };
 
-    // Handle sort by price
     const sortByPriceHandler = (e) => {
         setSortByPrice(e.target.value);
         setSortByName(null);
     };
 
-    // Sort current products by name or price
     const sortedProducts = useMemo(() => {
         const sorted = [...currentProducts];
         if (sortByName) {
@@ -93,6 +91,7 @@ function ProductList() {
                 </div>
             </div>
             <div className="container my-5 px-5">
+                <Types onTypeSelect={setSelectedType} /> {/* Thêm thẻ Types */}
                 <div className="row px-5">
                     <div className="col-12 mb-4">
                         <div className="d-flex justify-content-between mb-3">
