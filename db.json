@@ -1,15 +1,26 @@
 {
   "users": [
     {
+      "id": "a53c",
+      "username": "iamok123",
+      "email": "trueplain@gmail.com",
+      "password": "Laptrinhfe123.",
+      "cart": [],
+      "historyProduct": [
+        "6185616605359",
+        "6628791877807",
+        "6608479846575",
+        "6188142493871"
+      ],
+      "orderProduct": []
+    },
+    {
       "id": "16a9",
       "username": "vanh",
       "email": "vanh@gmail.com",
       "password": "111",
       "cart": [],
-      "historyProduct": [
-        "6184820506799",
-        "6628791877807"
-      ],
+      "historyProduct": [],
       "orderProduct": []
     },
     {
@@ -26,6 +37,15 @@
       "username": "test",
       "email": "test@gmail.com",
       "password": "111",
+      "cart": [],
+      "historyProduct": [],
+      "orderProduct": []
+    },
+    {
+      "id": "b7b7",
+      "username": "sieuvip",
+      "email": "sieuvip@gmail.com",
+      "password": "111111111111111111",
       "cart": [],
       "historyProduct": [],
       "orderProduct": []

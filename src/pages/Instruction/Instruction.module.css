@@ -1,12 +1,35 @@
 
 .bodycontainer{
+    display: flex;
     margin-top: 100px;
     max-width: 960px;
+    justify-content: center;
+    align-items: center;
+
 
 }
-.img{
+.bodycontainer p{
+    font-size: 1.5rem;
+}
+.bodycontainer h5{
+    font-size: 1.7rem;
+    font-weight: bold;
+}
+.bodycontainer h3{
+    font-weight: bolder;
+}
+
+.img {
     display: flex;
     justify-content: center;
     align-items: center;
+
+
+} img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-height: 500px;
+    max-width: 800px;
 
 }

@@ -91,7 +91,7 @@ function ProductList() {
                 </div>
             </div>
             <div className="container my-5 px-5">
-                <Types onTypeSelect={setSelectedType} /> {/* Thêm thẻ Types */}
+                <Types onTypeSelect={setSelectedType} selectedType={selectedType} />
                 <div className="row px-5">
                     <div className="col-12 mb-4">
                         <div className="d-flex justify-content-between mb-3">
