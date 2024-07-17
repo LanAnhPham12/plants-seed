@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import productApi from '../../api/productApi';
 import styles from "./Types.module.css"; //
 
-function Types({ onTypeSelect }) {
+function Types({ onTypeSelect, selectedType }) {
     const [types, setTypes] = useState([]);
 
     useEffect(() => {
@@ -20,10 +20,14 @@ function Types({ onTypeSelect }) {
 
     return (
         <div>
-            <h1>Products</h1>
-            <ul className={` ${styles.list} `}>
+
+            <ul className={styles.list}>
                 {types.map((type, index) => (
-                    <li key={index} onClick={() => onTypeSelect(type)}>
+                    <li
+                        key={index}
+                        onClick={() => onTypeSelect(type)}
+                        className={type === selectedType ? styles.selected : ''}
+                    >
                         {type}
                     </li>
                 ))}

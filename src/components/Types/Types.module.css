@@ -7,14 +7,18 @@
 
 }
 .list li{
-    font-weight: bold;
+    cursor: pointer;
+    font-weight: bolder;
     font-family: sans-serif;
     font-size: 10pt;
-    padding: 10px 10px 0px 0px;
-    color: #282c34;
+    padding: 10px;
+
 }
 .list>li:hover{
-    font-size: 12pt;
-    color: #04552d;
+    color: #4acc7e;
     transition: ease-in-out 0.5s;
+}
+.selected{
+    color: #89a68b; /* Màu sáng cho chữ khi được chọn */
+    font-weight: bolder;
 }

@@ -52,9 +52,9 @@ function Header() {
                             <i className="far fa-clock"></i>
                             <li className={`${styles["Men"]}`}>Sản phầm</li>
                         </Link>
-                        <Link className="text-white" style={{textDecoration: 'none'}}>
-                            <li className={`${styles["Men"]}`}>Về chúng tôi</li>
-                        </Link>
+                        {/*<Link className="text-white" style={{textDecoration: 'none'}}>*/}
+                        {/*    <li className={`${styles["Men"]}`}>Về chúng tôi</li>*/}
+                        {/*</Link>*/}
                         {/*<Link to={path.checkout} className="text-white" style={{textDecoration: 'none'}}>*/}
                         {/*    <li className={`${styles["Men"]}`}>Đặt hàng</li>*/}
                         {/*</Link>*/}
