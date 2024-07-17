@@ -55,6 +55,7 @@ function CartItem({ data, onUpdateCart }) {
             // Call parent component to update cart items
             const updatedUser = await userApi.getUserById(userId);
             onUpdateCart(updatedUser.cart);
+            window.location.reload(); // Reload lại trang sau khi xóa
         } catch (error) {
             console.error('Error deleting item from cart:', error);
         }
